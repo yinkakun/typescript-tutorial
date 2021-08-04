@@ -43,7 +43,9 @@ console.log(parseFloat('44'));
 type Ade = string;
 const Ade: Ade = 'gbolahan';
 
-let myMame: string | number = 'Adedire';
+type StringOrNumber = string | number;
+
+let myMame: StringOrNumber = 'Adedire';
 
 myMame = 4;
 
@@ -86,3 +88,110 @@ function impossibleTypeGuard(value: any) {
     return value;
   }
 }
+
+// Describable function
+
+type DescribableFunction = {
+  description: string;
+  (someArg: number): boolean;
+};
+function doSomething(fn: DescribableFunction) {
+  console.log(fn.description + ' returned ' + fn(6));
+}
+
+function describableFunction() {
+  return true;
+}
+
+describableFunction.description = 'hello world';
+
+doSomething(describableFunction);
+
+// Generics
+function firstElement1(arr: any[]) {
+  return arr[0];
+}
+
+firstElement1([1, 3, 4, 'b']);
+
+function firstElement2<Type>(arr: Type[]): Type {
+  return arr[0];
+}
+
+firstElement2(['d', 1, 2, 3, 'b']);
+
+const arrayOfStringAndNumbers: Array<string | number> = [3, 5, 'f'];
+
+arrayOfStringAndNumbers[0].toString().split('');
+
+function merge<T extends object, U extends object>(a: T, b: U) {
+  return Object.assign(a, b);
+}
+
+const mergedObj = merge({ name: 'Michael' }, { age: 30 });
+
+console.log(mergedObj);
+
+interface Lengthy {
+  length: number;
+}
+
+const countAndDescribe = <T extends Lengthy>(element: T): [T, string] => {
+  let description = 'Element has no value';
+
+  if (element.length === 1) {
+    description = 'Element has just 1 value';
+  }
+
+  if (element.length > 1) {
+    description = 'Element has more than 1 values';
+  }
+
+  return [element, description];
+};
+
+console.log(countAndDescribe([3]));
+
+const extractAndConvert = <T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) => {
+  return obj[key];
+};
+
+extractAndConvert({ age: 3 }, 'age');
+
+class ItemsStore<T extends string | number | boolean> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  removeItem(item: T) {
+    this.items.splice(this.items.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.items];
+  }
+}
+
+const stringStore = new ItemsStore<string>();
+stringStore.addItem('this is a text');
+stringStore.addItem('this is another text');
+stringStore.addItem('991');
+
+console.log('text store', stringStore.getItems());
+
+// const objectStore = new ItemsStore<object>();
+
+// objectStore.addItem({ name: 'Yinka' });
+// objectStore.addItem({ name: 'Ace' });
+// objectStore.removeItem({ name: 'Yinka' });
+
+// console.log(objectStore.getItems());
+
+const threes: 3[] = [];
+
+threes.push(3);
