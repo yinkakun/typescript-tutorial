@@ -282,3 +282,38 @@ inputElement.value = `I'm an Input`;
 
 const secondInputElement = document.querySelector('#input') as HTMLInputElement;
 secondInputElement.value = `Yooooooooo`;
+
+// Function Overload
+// Arrow function
+type IsStringOrNumber = {
+  (a: number, b: number): number;
+  (a: string | number, b: string | number): string;
+};
+
+const add: IsStringOrNumber = (a: any, b: any) => {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+
+  return a + b;
+};
+
+add(4, 5);
+add(9, '5');
+
+// Function Overload
+// Function declaration
+function addUp(a: number, b: number): number;
+function addUp(a: string, b: string): string;
+function addUp(a: StringOrNumber, b: StringOrNumber): string;
+
+function addUp(a: StringOrNumber, b: StringOrNumber) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+
+  return a + b;
+}
+
+addUp(5, 5);
+addUp('Shola', 99);
