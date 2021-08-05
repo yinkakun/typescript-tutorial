@@ -244,3 +244,33 @@ adminDepartment.getInfo();
 adminDepartment.addAdmin('Ace');
 adminDepartment.addAdmin('Yinka');
 adminDepartment.getAdmins();
+
+// Interfaces
+// interface defines the structure of an object
+
+interface Person {
+  name: string;
+  age: number;
+  height?: number;
+  hobbies: string[];
+  greet?(greeting: string): void;
+}
+
+const Ace: Person = {
+  name: 'Ace Abubakar',
+  age: 95,
+  hobbies: ['joking around'],
+  greet(greeting: string) {
+    console.log(greeting);
+  },
+};
+
+interface AddTwoNumbers {
+  (n1: number, n2: number): number;
+}
+
+const addTwoNumbers: AddTwoNumbers = (n1, n2) => {
+  return n1 + n2;
+};
+
+addTwoNumbers(4, 5);
