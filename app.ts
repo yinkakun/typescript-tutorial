@@ -274,3 +274,11 @@ const addTwoNumbers: AddTwoNumbers = (n1, n2) => {
 };
 
 addTwoNumbers(4, 5);
+
+// Typecasting
+const inputElement = <HTMLInputElement>document.querySelector('#input-element');
+
+inputElement.value = `I'm an Input`;
+
+const secondInputElement = document.querySelector('#input') as HTMLInputElement;
+secondInputElement.value = `Yooooooooo`;
