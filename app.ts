@@ -195,3 +195,52 @@ console.log('text store', stringStore.getItems());
 const threes: 3[] = [];
 
 threes.push(3);
+
+// Classes
+
+class Department {
+  constructor(
+    private readonly id: string,
+    public name: string,
+    private employees: string[] = []
+  ) {}
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  getInfo(this: Department) {
+    console.log(
+      `ID: ${this.id}. Department: ${this.name}. Employees: ${this.employees}`
+    );
+  }
+}
+
+const accountingDepartment = new Department('111', 'Accounting');
+accountingDepartment.addEmployee('Shola');
+accountingDepartment.addEmployee('Dammy');
+
+accountingDepartment.getInfo();
+
+// Class Inheritance
+
+class AdminDepartment extends Department {
+  constructor(id: string, private admins: string[] = []) {
+    super(id, 'Admin');
+  }
+
+  getAdmins(this: AdminDepartment) {
+    console.log(`Admins: ${this.admins}`);
+  }
+
+  addAdmin(admin: string) {
+    this.admins.push(admin);
+  }
+}
+
+const adminDepartment = new AdminDepartment('777');
+adminDepartment.addEmployee('Yomi Fash');
+adminDepartment.getInfo();
+adminDepartment.addAdmin('Ace');
+adminDepartment.addAdmin('Yinka');
+adminDepartment.getAdmins();
